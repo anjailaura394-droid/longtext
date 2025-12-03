@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buku Digital + Video & PDF Unlock</title>
+
+<style>
+    body{
+        margin:0;
+        background:#e7dfc6;
+        font-family:"Times New Roman", serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        flex-direction:column;
+        padding:20px;
+        overflow-x:hidden;
+        animation:bgFade 2s ease;
+    }
+
+    @keyframes bgFade{
+        from{opacity:0; filter:blur(3px);}
+        to{opacity:1; filter:blur(0);}
+    }
+
+    .book{
+        width:90%;
+        max-width:600px;
+        height:300px;
+        background:#fff9e6;
+        border:2px solid #b08968;
+        border-radius:12px;
+        padding:25px;
+        box-shadow:0 0 35px rgba(0,0,0,.2);
+        overflow:auto;
+        position:relative;
+        animation:bookEnter .9s ease;
+    }
+
+    #pageNumber{
+        position:absolute;
+        bottom:10px;
+        right:20px;
+        background:#b08968;
+        color:white;
+        padding:5px 10px;
+        font-size:14px;
+        border-radius:6px;
+    }
+
+    .page{ display:none; height:100%; overflow-y:auto; }
+    .page.active{
+        display:block;
+        line-height:1.5;
+        font-size:19px;
+        text-align:justify;
+    }
+
+    .nav-btn{
+        margin-top:15px;
+        display:flex;
+        gap:12px;
+    }
+    .nav-btn button{
+        font-size:22px;
+        padding:8px 20px;
+        border:none;
+        background:#b08968;
+        color:white;
+        border-radius:8px;
+        cursor:pointer;
+        transition:.25s;
+    }
+    .nav-btn button:hover{
+        background:#d7a372;
+        transform:scale(1.12) translateY(-2px);
+    }
+
+    .cta-section{
+        margin-top:25px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+    .cta-pdf-btn{
+        background:#8c6d50;
+        color:white;
+        border:none;
+        padding:10px 14px;
+        border-radius:8px;
+        font-size:15px;
+        font-weight:600;
+        cursor:pointer;
+        transition:.25s;
+    }
+    .cta-pdf-btn:hover{
+        background:#b08968;
+        transform:scale(1.15) rotate(-2deg);
+    }
+
+    #pdfBox{
+        margin-top:25px;
+        display:none;
+        width:90%;
+        max-width:700px;
+        height:450px;
+        border-radius:12px;
+        overflow:hidden;
+        box-shadow:0 0 35px rgba(0,0,0,.35);
+        position:relative;
+    }
+
+    /* PDF viewer */
+    #pdfViewer{
+        width:100%;
+        height:100%;
+        border:none;
+        display:none;
+    }
+
+    /* Video viewer */
+    #videoViewer{
+        width:100%;
+        height:100%;
+        display:none;
+        background:black;
+    }
+
+    #closePdf{
+        position:absolute;
+        top:8px;
+        right:8px;
+        background:#b08968;
+        color:white;
+        border:none;
+        padding:6px 10px;
+        border-radius:6px;
+        font-size:14px;
+        cursor:pointer;
+        font-weight:bold;
+        transition:.25s;
+        z-index:20;
+    }
+</style>
+</head>
+<body>
+
+<!-- BOOK PAGE -->
+<div class="book">
+    <div class="page active">gatau tiba tiba kepikiran, maaf ya kalo selama pacaran aku gapernah ngertiin kamu, aku yang cemburuan, aku yang posesif, aku yang minta dimengerti, tapi Ketika kamu butuh dimanja dan butuh aku, aku malah ga ngerti kondisi kamu, aku ga ngerti kalo kamu lagi sakit lagi cape bukannya buat kamu terhibur malah aku yang bikin kamu nambah cape, terima kasih juga atas effort effort kamu yang kamu lakuin buat aku, terus setiap long text yang kamu kasih ke aku tapi jarang aku jawab, soalnya aku ga bisa ngerangkai kata kata aku juga gatau rasanya balas budi kasih sayang gimana karena keluarga aku ga pernah ngajarin itu…</div>
+    <div class="page">aku juga seneng long text kamu, pap kamu, effort kamu semuanya aku suka, oiya asal kamu tau aku sayang sama kamu sampai saat ini meskipun kemarin kemarin aku kecewa sama kamu ga bisa dipungkiri juga kalo sayang aku lebih besar dari kecewaku tapi kayaknya hubungan ini juga ga bisa diperbaiki lagi uda ancur lebur juga kita juga kurang komunikasi apa yang kita rasain saat itu, kita cuman bisa mendem mendem sampe semuanya ancur, sepele ya padahal tapi yauda, jujur aku garela kalo kamu sama yang lain aku ga siap kamu disayang sayang sama yang lain tapi itu semua pilihan kamu, karena aku udah ga ada hak buat ngelarang ngelarang kamu tapi buat mempertahanin hubungan juga ga bisa , aku cuman pengen balik ke awal kita ketemu kita komunikasiin bareng bareng aku kangen sama kenangan kita dulu </div>
+    <div class="page">maaf kalo pas pacaran atau uda putus aku sering kekang kamu, sering ngambek, sering marah marah kekamu, dan mungkin karena sifat aku yang kaya gitu juga ngancurin semuanya kamu jadi sering ngeboongin aku, kamu nak tau ndaa setiap kali kamu ngeboong itu ketauan tau tapi aku cuman bisa diem, aku cuman mantau sejauh apa kamu boongin aku but it’s okei itu semua karena kesalahan aku yang punya sifat kaya gitu</div>
+    <div class="page">kalo diinget” lucu ya pas awal awal kita jadian kita ke kebun raya bogor kita tukeran kado ketawa ketawa tanpa tau hubungan kita akan berakhir begini mungkin kalo aku uda sembuh aku bakal me time kesana, aku percaya kok kamu orangnya baik tapi mungkin karena pengaruh teman kamu aja kali ya apalagi dari kecil bareng terus, tapi yauda udah kejadian dan aku juga ga bisa ngerubah sifat kamu terima kasih uda hadir dihidup aku dan terima kasih atas pengalaman pengalaman yang terjadi 2 tahun lebih iniiii</div>
+    <div class="page">nantii long text kedua setelah kita ketemu yaa, kamu boleh liat videonyaa</div>
+    
+    <div id="pageNumber"></div>
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav-btn">
+    <button onclick="prevPage()"> < </button>
+    <button onclick="nextPage()"> > </button>
+</div>
+
+<!-- CTA BUTTONS -->
+<div class="cta-section">
+    <button class="cta-pdf-btn" onclick="unlockVideo('videoo.mp4')">VIDEO 1</button>
+</div>
+
+<!-- VIEWER BOX -->
+<div id="pdfBox">
+    <iframe id="pdfViewer"></iframe>
+    <video id="videoViewer" controls></video>
+    <button id="closePdf" onclick="closePDF()">✕</button>
+</div>
+
+<script>
+let current = 0;
+const pages = document.querySelectorAll(".page");
+const pageNumber = document.getElementById("pageNumber");
+
+function updatePage(){
+    pages.forEach(p => p.classList.remove("active"));
+    pages[current].classList.add("active");
+    pageNumber.textContent = `${current+1}/${pages.length}`;
+}
+
+function nextPage(){
+    if(current < pages.length-1){
+        current++;
+        updatePage();
+        closePDF();
+    }
+}
+function prevPage(){
+    if(current > 0){
+        current--;
+        updatePage();
+        closePDF();
+    }
+}
+
+function unlockPDF(file){
+    const pdf = document.getElementById("pdfViewer");
+    const vid = document.getElementById("videoViewer");
+
+    vid.style.display="none";
+    vid.pause();
+    vid.src="";
+
+    pdf.style.display="block";
+    pdf.src = file;
+
+    document.getElementById("pdfBox").style.display="block";
+}
+
+function unlockVideo(file){
+    const pdf = document.getElementById("pdfViewer");
+    const vid = document.getElementById("videoViewer");
+
+    pdf.style.display="none";
+    pdf.src="";
+
+    vid.style.display="block";
+    vid.src = file;
+    vid.load();
+
+    document.getElementById("pdfBox").style.display="block";
+}
+
+function closePDF(){
+    const pdf = document.getElementById("pdfViewer");
+    const vid = document.getElementById("videoViewer");
+
+    pdf.style.display="none";
+    vid.style.display="none";
+
+    pdf.src="";
+    vid.pause();
+    vid.src="";
+
+    document.getElementById("pdfBox").style.display="none";
+}
+
+updatePage();
+</script>
+
+</body>
+</html>
